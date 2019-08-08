@@ -120,13 +120,7 @@ public class Pokemon {
 	}
 
 
-	public static void main(String[] args) {
 
-		Pokemon pokemon = new Pokemon("Bulbassur", PokeType.GRASS);
-		System.out.println(pokemon);
-		
-		System.out.println(pokemon.getPokeType());
-	}
 
 
 }

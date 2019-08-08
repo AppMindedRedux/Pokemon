@@ -32,11 +32,11 @@ public class PokemonTrainer {
 	}
 
 	public boolean deletePokemon(Pokemon pokemon) {
-		
-		if(pokemon != null) {
+
+		if (pokemon != null) {
 			for (int i = 0; i < team.length; i++) {
-				
-				if(pokemon.equals(team[i])) {
+
+				if (pokemon.equals(team[i])) {
 					team[i] = null;
 					return true;
 				}
@@ -47,14 +47,14 @@ public class PokemonTrainer {
 	}
 
 	public Pokemon getPokemonByName(String name) throws NoPokemonFoundException, NoValidSearchException {
-		
-		if(name != null && name.replace(" ", "").length() != 0) {
+
+		if (name != null && name.replace(" ", "").length() != 0) {
 			for (int i = 0; i < team.length; i++) {
-				if(name.equals(team[i].getName())) {
+				if (name.equals(team[i].getName())) {
 					return team[i];
 				}
 			}
-			
+
 			throw new NoPokemonFoundException(name.toUpperCase() + " not found!");
 		}
 
@@ -66,11 +66,36 @@ public class PokemonTrainer {
 		return team;
 	}
 
+	public void searchStat(PokeStatFilter filter, Pokemon pokemon) {
+
+		if (filter.filterStat(pokemon)) {
+			System.out.println("Pokemon meets the requirements.");
+		} else {
+			System.out.println("Pokemon does not meet the requirements.");
+		}
+	}
+
+	public void searchPokeType(PokeTypeFilter filter) {
+
+		Pokemon[] filteredTeam = filter.filterType(team);
+
+		if (filteredTeam != null) {
+			System.out.println("Pokemon type is found!\n");
+			for (Pokemon p : filteredTeam) {
+
+				if (p != null) {
+					System.out.println(p);
+				} 
+			} 
+		} else {
+			System.out.println("No Pokemon in your team has this type!");
+		}
+
+	}
+
 	@Override
 	public String toString() {
 		return "PokemonTrainer [nickName=" + nickName + ", team=" + Arrays.toString(team) + "]";
 	}
-	
-	
-	
+
 }
