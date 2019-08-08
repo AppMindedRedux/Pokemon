@@ -100,7 +100,10 @@ public class PokemonApp {
 		alex.train(service::train, squirtle);
 		
 		//UNBOUND METHOD REFERENCE
-		alex.train(p -> p.evolve(), bulBassur);
+		alex.train(Pokemon::evolve, bulBassur);
+		
+//		Pokemon[] temp = alex.getTeam();
+//		Stream.of(temp).filter().forEach(System.out.println);
 	}
 
 }
