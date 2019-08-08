@@ -98,4 +98,12 @@ public class PokemonTrainer {
 		return "PokemonTrainer [nickName=" + nickName + ", team=" + Arrays.toString(team) + "]";
 	}
 
+	
+	public void train(Handler handler, Pokemon pokemon) {
+		
+		
+		handler.handle(pokemon);
+		
+	}
+
 }

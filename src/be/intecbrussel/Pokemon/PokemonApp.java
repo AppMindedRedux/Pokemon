@@ -1,5 +1,7 @@
 package be.intecbrussel.Pokemon;
 
+import be.intecbrussel.Services.DayCareService;
+
 public class PokemonApp {
 
 	public static void main(String[] args) {
@@ -11,6 +13,8 @@ public class PokemonApp {
 		
 		PokemonTrainer alex = new PokemonTrainer("Mr. Robot");
 		
+		
+		// save all 3 created Pokemons to the PokemonTrainer alex
 		if(alex.savePokemon(bulBassur)) {
 			System.out.println("Pokemon is saved!");
 		} else {
@@ -49,11 +53,28 @@ public class PokemonApp {
 		alex.searchStat(pokemon -> pokemon.getHp() > 20, bulBassur);
 		
 		
-		alex.searchPokeType(new PokeTypeFilter() {
+//		alex.searchPokeType(new PokeTypeFilter() {
+//			
+//			@Override
+//			public Pokemon[] filterType(Pokemon... team) {
+//				
+//				Pokemon[] filteredTeam = new Pokemon[6];
+//				boolean isEmpty = true;
+//				
+//				for (int i = 0, index = 0; i < team.length; i++) {
+//					if(team[i] != null && team[i].getPokeType() == PokeType.GRASS) {
+//						filteredTeam[index++] = team[i];
+//						isEmpty = false;
+//					}
+//				}
+//				
+//				return isEmpty ? null : filteredTeam;
+//			}
+//		});
+		
+		alex.searchPokeType((Pokemon[] team) -> {
 			
-			@Override
-			public Pokemon[] filterType(Pokemon... team) {
-				
+
 				Pokemon[] filteredTeam = new Pokemon[6];
 				boolean isEmpty = true;
 				
@@ -65,10 +86,21 @@ public class PokemonApp {
 				}
 				
 				return isEmpty ? null : filteredTeam;
-			}
+		
 		});
 		
 		
+		// STATIC METHOD reference ::
+		// static methode van HyperTrainer class oproepen
+		alex.train(HyperTrainer::train, charMander);
+		
+		
+		// BOUND METHOD REFERENCE
+		DayCareService service = new DayCareService();
+		alex.train(service::train, squirtle);
+		
+		//UNBOUND METHOD REFERENCE
+		alex.train(p -> p.evolve(), bulBassur);
 	}
 
 }

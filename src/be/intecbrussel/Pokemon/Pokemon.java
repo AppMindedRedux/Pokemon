@@ -10,6 +10,8 @@ public class Pokemon {
 	private int hp;
 	private int atk;
 	private int def;
+	
+	private final int MAX_STAT = 50;
 
 	private Random rand = new Random();
 
@@ -26,7 +28,7 @@ public class Pokemon {
 	}
 
 	private int generateStat() {
-		return rand.nextInt(50) + 1;
+		return rand.nextInt(MAX_STAT) + 1;
 	}
 
 	public String getName() {
@@ -50,7 +52,7 @@ public class Pokemon {
 	}
 
 	public void setHp(int hp) {
-		this.hp = hp;
+		this.hp = hp < MAX_STAT ? hp : MAX_STAT;
 	}
 
 	public int getAtk() {
@@ -58,7 +60,7 @@ public class Pokemon {
 	}
 
 	public void setAtk(int atk) {
-		this.atk = atk;
+		this.atk = atk < MAX_STAT ? atk : MAX_STAT ; 
 	}
 
 	public int getDef() {
@@ -66,10 +68,15 @@ public class Pokemon {
 	}
 
 	public void setDef(int def) {
-		this.def = def;
+		this.def = def < MAX_STAT ? def : MAX_STAT;
 	}
 
-	
+	public Pokemon evolve() {
+		setDef(getDef() + 5);
+		setAtk(getAtk() + 5);
+		setHp(getHp() + 5);
+		return this;
+	}
 	
 	@Override
 	public int hashCode() {
